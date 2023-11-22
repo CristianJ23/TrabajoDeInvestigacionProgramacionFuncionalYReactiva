@@ -1,0 +1,51 @@
+// 1.- Crear una función con nombre (integracion) que use el método de Simpson para
+//calcular el valor aproximado de cualquier función f (x). Se recomienda analizar lo
+//siguiente:
+//1. El tipo de dato que devolverá la función integracion
+//2. ¿Cuáles son los parámetros que recibe la función?
+
+def media(a: Double, b: Double): Double = (a + b) / 2
+
+def Integracion(a: Double, b: Double, fun: Double => Double): Double = ((b - a) /6) * (fun(a) + 4*(fun(media(a, b))) + fun(b))
+
+
+// 2.- Aproxima el valor de las siguientes integrales de nidas usando la función
+//integracion creada en el paso 1.
+val f1 = (x: Double) => -(math.pow(x, 2)) + 8*x - 12
+Integracion(3, 5, f1)
+
+val f2 = (x: Double) => 3 * math.pow(x, 2)
+Integracion(0, 2, f2)
+
+val f3 = (x: Double) => (x + (2*math.pow(x, 2)) - (math.pow(x, 3)) + (5*math.pow(x, 4)))
+val s3 = Integracion(-1, 1, f3)
+
+def f4(x: Double): Double = (2*x +1) / ((math.pow(x, 2) + x))
+val s4 = Integracion(1, 2, f4)
+
+def f5(x: Double): Double = math.pow(math.E, x)
+val s5 = Integracion(0, 1, f5)
+
+val f6  = (x: Double) => 1 / (math.sqrt(x - 1))
+val s6 = Integracion(2, 3, f6)
+
+val f7 = (x: Double) => 1 / (1 + math.pow(x, 2))
+val s7 = Integracion(0, 1, f7)
+
+
+// 3.- Calcula el error que se presenta en cada aproximación.
+def error(valorEsperado: Double, valorObtenido: Double): Double = valorEsperado - valorObtenido
+
+val e1 = error(7.33, (Integracion(3, 5, f1)))
+
+val e2 = error(8, Integracion(0, 2, f2))
+
+val e3 = error(3.33, s3)
+
+val e4 = error(1.09861, s4)
+
+val e5 = error(1.71828, s5)
+
+val e6 = error(0.828427, s6)
+
+val e7 = error(0.785398, s7)
